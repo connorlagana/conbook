@@ -1,48 +1,48 @@
-class ItemsController < ApplicationController
-  before_action :set_todo
-  before_action :set_todo_item, only: [:show, :update, :destroy]
+class PostsController < ApplicationController
+  before_action :set_post
+  before_action :set_post_post, only: [:show, :update, :destroy]
 
-  # GET /todos/:todo_id/items
+  # GET /posts/:post_id/posts
   def index
-    json_response(@todo.items)
+    json_response(@post.posts)
   end
 
-  # GET /todos/:todo_id/items/:id
+  # GET /posts/:post_id/posts/:id
   def show
-    json_response(@item)
+    json_response(@post)
   end
 
-  # POST /todos/:todo_id/items
+  # POST /posts/:post_id/posts
   def create
-    @item = @todo.items.create!(item_params)
-    # json_response(@todo, :created)
-    json_response(status: "SUCCESS", message: 'item created successfully.', data: @item.name)
+    @post = @post.posts.create!(post_params)
+    # json_response(@post, :created)
+    json_response(status: "SUCCESS", message: 'post created successfully.', data: @post.com)
 
   end
 
-  # PUT /todos/:todo_id/items/:id
+  # PUT /posts/:post_id/posts/:id
   def update
-    @item.update(item_params)
-    json_response(status: 'SUCCESS', message: 'item updated successfully.', data: @item.name)
+    @post.update(post_params)
+    json_response(status: 'SUCCESS', message: 'post updated successfully.', data: @post.com)
   end
 
-  # DELETE /todos/:todo_id/items/:id
+  # DELETE /posts/:post_id/posts/:id
   def destroy
-    @item.destroy
-    json_response(status: 'SUCCESS', message: 'item deleted successfully.', data: @item.name)
+    @post.destroy
+    json_response(status: 'SUCCESS', message: 'post deleted successfully.', data: @post.com)
   end
 
   private
 
-  def item_params
-    params.permit(:name, :done)
+  def post_params
+    params.permit(:com, :done)
   end
 
-  def set_todo
-    @todo = Todo.find(params[:todo_id])
+  def set_post
+    @post = post.find(params[:post_id])
   end
 
-  def set_todo_item
-    @item = @todo.items.find_by!(id: params[:id]) if @todo
+  def set_post_post
+    @post = @post.posts.find_by!(id: params[:id]) if @post
   end
 end

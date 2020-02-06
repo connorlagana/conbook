@@ -3,39 +3,19 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = current_user.posts
+    @posts = Post.all
     json_response(@posts)
   end
 
   # POST /posts
   def create
-    @post = current_user.posts.create!(post_params)
+    @post = Post.create!(post_params)
     json_response(@post, :created)
   end
 
   # GET /posts/:id
   def show
     json_response(@post)
-  end
-
-  def index
-    # get current user posts
-    @posts = current_user.posts
-    json_response(@posts)
-  end
-  # [...]
-  # POST /posts
-  def create
-    # create posts belonging to current user
-    @post = current_user.posts.create!(post_params)
-    json_response(@post, :created)
-  end
-  # [...]
-  private
-
-  # remove `created_by` from list of permitted parameters
-  def post_params
-    params.permit(:description)
   end
 
   # PUT /posts/:id
@@ -55,7 +35,7 @@ class PostsController < ApplicationController
 
   def post_params
     # whitelist params
-    params.permit(:description)
+    params.permit(:description, :created_by)
   end
 
   def set_post
