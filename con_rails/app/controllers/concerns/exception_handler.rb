@@ -1,5 +1,12 @@
 #what if the case where we don't have any records? Let's use exception handling so we can return 404 message.
 
+#This singleton wraps JWT to provide token encoding and decoding methods. The encode method will be responsible 
+#for creating tokens based on a payload (user id) and expiration period. Since every Rails application has a unique 
+#secret key, we'll use that as our secret to sign tokens. The decode method, on the other hand, accepts a token 
+#and attempts to decode it using the same secret used in encoding. In the event decoding fails, be it due to 
+#expiration or validation, JWT will raise respective exceptions which will be caught and handled by the Exception 
+#Handler module.
+
 module ExceptionHandler
   extend ActiveSupport::Concern
 
